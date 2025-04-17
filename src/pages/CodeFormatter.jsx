@@ -155,11 +155,11 @@ const CodeFormatter = () => {
   };
 
   const handleFileUpload = (event) => {
-    const file = event.target.files[0];
+    const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setCode(e.target.result);
+        setCode(e.target?.result || '');
         toast.success("File uploaded successfully");
       };
       reader.readAsText(file);
