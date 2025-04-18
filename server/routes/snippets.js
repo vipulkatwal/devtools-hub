@@ -1,14 +1,14 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const snippetsController = require('../controllers/snippetsController');
-const auth = require('../middleware/auth');
+const snippetsController = require("../controllers/snippetsController");
+const { protect } = require("../middleware/auth");
 
 // All routes are protected
-router.get('/', auth, snippetsController.getUserSnippets);
-router.get('/search', auth, snippetsController.searchSnippets);
-router.get('/:id', auth, snippetsController.getSnippetById);
-router.post('/', auth, snippetsController.createSnippet);
-router.put('/:id', auth, snippetsController.updateSnippet);
-router.delete('/:id', auth, snippetsController.deleteSnippet);
+router.get("/", protect, snippetsController.getUserSnippets);
+router.get("/search", protect, snippetsController.searchSnippets);
+router.get("/:id", protect, snippetsController.getSnippetById);
+router.post("/", protect, snippetsController.createSnippet);
+router.put("/:id", protect, snippetsController.updateSnippet);
+router.delete("/:id", protect, snippetsController.deleteSnippet);
 
 module.exports = router;

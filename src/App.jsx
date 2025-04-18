@@ -4,12 +4,18 @@ import { store } from './store';
 import MainLayout from './components/layout/MainLayout';
 import Dashboard from './pages/Dashboard';
 import CodeFormatter from './pages/CodeFormatter';
-import MarkdownPreview from './pages/MarkdownPreview';
 import RegexTester from './pages/RegexTester';
 import JsonFormatter from './pages/JsonFormatter';
 import SnippetManager from './pages/SnippetManager';
 import UuidGenerator from './components/UuidGenerator';
 import ColorPalette from './pages/ColorPalette';
+import LoremIpsum from './pages/LoremIpsum';
+import DiffChecker from './pages/DiffChecker';
+import IconPicker from './pages/IconPicker';
+import AiCommitGenerator from './pages/AiCommitGenerator';
+import BreakpointTester from './pages/BreakpointTester';
+import JwtDecoder from './pages/JwtDecoder';
+import ReadmeGenerator from './pages/ReadmeGenerator';
 import { Toaster } from 'sonner';
 
 const App = () => {
@@ -20,12 +26,18 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/code-formatter" element={<CodeFormatter />} />
-            <Route path="/markdown-preview" element={<MarkdownPreview />} />
             <Route path="/regex-tester" element={<RegexTester />} />
             <Route path="/json-formatter" element={<JsonFormatter />} />
             <Route path="/uuid-generator" element={<UuidGenerator />} />
             <Route path="/color-palette" element={<ColorPalette />} />
             <Route path="/snippets" element={<SnippetManager />} />
+            <Route path="/lorem-ipsum" element={<LoremIpsum />} />
+            <Route path="/diff-checker" element={<DiffChecker />} />
+            <Route path="/icon-picker" element={<IconPicker />} />
+            <Route path="/ai-commit-generator" element={<AiCommitGenerator />} />
+            <Route path="/breakpoint-tester" element={<BreakpointTester />} />
+            <Route path="/jwt-decoder" element={<JwtDecoder />} />
+            <Route path="/readme-generator" element={<ReadmeGenerator />} />
           </Routes>
         </MainLayout>
         <Toaster

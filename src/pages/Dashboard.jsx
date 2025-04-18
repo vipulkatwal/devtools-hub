@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   Code,
-  FileText,
   Terminal,
   Braces,
   Bookmark,
@@ -14,7 +13,10 @@ import {
   Keyboard,
   Type,
   GitCompare,
-  Smile
+  Smile,
+  Smartphone,
+  Bot,
+  FileEdit
 } from 'lucide-react';
 
 const tools = [
@@ -26,15 +28,6 @@ const tools = [
     color: 'from-blue-500/10 to-blue-600/10 hover:from-blue-500/20 hover:to-blue-600/20',
     iconColor: 'text-blue-500',
     gradient: 'from-blue-400 to-blue-600'
-  },
-  {
-    title: 'Markdown Preview',
-    description: 'Preview your Markdown content in real-time with support for images and tables.',
-    icon: FileText,
-    path: '/markdown-preview',
-    color: 'from-purple-500/10 to-purple-600/10 hover:from-purple-500/20 hover:to-purple-600/20',
-    iconColor: 'text-purple-500',
-    gradient: 'from-purple-400 to-purple-600'
   },
   {
     title: 'Regex Tester',
@@ -101,12 +94,48 @@ const tools = [
   },
   {
     title: 'Icon Picker',
-    description: 'Search and copy developer-friendly icons and emojis with instant preview.',
+    description: 'Browse and search through a collection of icons and emojis.',
     icon: Smile,
     path: '/icon-picker',
     color: 'from-orange-500/10 to-orange-600/10 hover:from-orange-500/20 hover:to-orange-600/20',
     iconColor: 'text-orange-500',
     gradient: 'from-orange-400 to-orange-600'
+  },
+  {
+    title: 'AI Commit Generator',
+    description: 'Generate commit messages from code diffs using AI models.',
+    icon: Bot,
+    path: '/ai-commit-generator',
+    color: 'from-teal-500/10 to-teal-600/10 hover:from-teal-500/20 hover:to-teal-600/20',
+    iconColor: 'text-teal-500',
+    gradient: 'from-teal-400 to-teal-600'
+  },
+  {
+    title: 'Breakpoint Tester',
+    description: 'Test responsive layouts across different device sizes.',
+    icon: Smartphone,
+    path: '/breakpoint-tester',
+    color: 'from-rose-500/10 to-rose-600/10 hover:from-rose-500/20 hover:to-rose-600/20',
+    iconColor: 'text-rose-500',
+    gradient: 'from-rose-400 to-rose-600'
+  },
+  {
+    title: 'JWT Decoder',
+    description: 'Decode and verify JSON Web Tokens with detailed information.',
+    icon: Key,
+    path: '/jwt-decoder',
+    color: 'from-amber-500/10 to-amber-600/10 hover:from-amber-500/20 hover:to-amber-600/20',
+    iconColor: 'text-amber-500',
+    gradient: 'from-amber-400 to-amber-600'
+  },
+  {
+    title: 'README Generator',
+    description: 'Generate professional README files with badges and markdown preview.',
+    icon: FileEdit,
+    path: '/readme-generator',
+    color: 'from-violet-500/10 to-violet-600/10 hover:from-violet-500/20 hover:to-violet-600/20',
+    iconColor: 'text-violet-500',
+    gradient: 'from-violet-400 to-violet-600'
   }
 ];
 
