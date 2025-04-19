@@ -12,10 +12,11 @@ import ColorPalette from './pages/ColorPalette';
 import LoremIpsum from './pages/LoremIpsum';
 import DiffChecker from './pages/DiffChecker';
 import IconPicker from './pages/IconPicker';
-import AiCommitGenerator from './pages/AiCommitGenerator';
 import BreakpointTester from './pages/BreakpointTester';
 import JwtDecoder from './pages/JwtDecoder';
 import ReadmeGenerator from './pages/ReadmeGenerator';
+import CssTools from './pages/CssTools';
+import MetaTags from './pages/MetaTags';
 import { Toaster } from 'sonner';
 
 const App = () => {
@@ -34,10 +35,11 @@ const App = () => {
             <Route path="/lorem-ipsum" element={<LoremIpsum />} />
             <Route path="/diff-checker" element={<DiffChecker />} />
             <Route path="/icon-picker" element={<IconPicker />} />
-            <Route path="/ai-commit-generator" element={<AiCommitGenerator />} />
             <Route path="/breakpoint-tester" element={<BreakpointTester />} />
             <Route path="/jwt-decoder" element={<JwtDecoder />} />
             <Route path="/readme-generator" element={<ReadmeGenerator />} />
+            <Route path="/css-tools" element={<CssTools />} />
+            <Route path="/meta-tags" element={<MetaTags />} />
           </Routes>
         </MainLayout>
         <Toaster

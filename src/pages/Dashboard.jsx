@@ -15,11 +15,21 @@ import {
   GitCompare,
   Smile,
   Smartphone,
-  Bot,
-  FileEdit
+  FileEdit,
+  Layout,
+  Share2
 } from 'lucide-react';
 
 const tools = [
+  {
+    title: 'CSS Tools',
+    description: 'Generate and customize CSS for flexbox, grid, shadows, and gradients.',
+    icon: Layout,
+    path: '/css-tools',
+    color: 'from-teal-500/10 to-teal-600/10 hover:from-teal-500/20 hover:to-teal-600/20',
+    iconColor: 'text-teal-500',
+    gradient: 'from-teal-400 to-teal-600'
+  },
   {
     title: 'Code Formatter',
     description: 'Format your code with customizable rules and support for multiple languages.',
@@ -102,15 +112,6 @@ const tools = [
     gradient: 'from-orange-400 to-orange-600'
   },
   {
-    title: 'AI Commit Generator',
-    description: 'Generate commit messages from code diffs using AI models.',
-    icon: Bot,
-    path: '/ai-commit-generator',
-    color: 'from-teal-500/10 to-teal-600/10 hover:from-teal-500/20 hover:to-teal-600/20',
-    iconColor: 'text-teal-500',
-    gradient: 'from-teal-400 to-teal-600'
-  },
-  {
     title: 'Breakpoint Tester',
     description: 'Test responsive layouts across different device sizes.',
     icon: Smartphone,
@@ -136,6 +137,15 @@ const tools = [
     color: 'from-violet-500/10 to-violet-600/10 hover:from-violet-500/20 hover:to-violet-600/20',
     iconColor: 'text-violet-500',
     gradient: 'from-violet-400 to-violet-600'
+  },
+  {
+    title: 'Meta Tags Generator',
+    description: 'Generate meta tags for better SEO and social media sharing.',
+    icon: Share2,
+    path: '/meta-tags',
+    color: 'from-indigo-500/10 to-indigo-600/10 hover:from-indigo-500/20 hover:to-indigo-600/20',
+    iconColor: 'text-indigo-500',
+    gradient: 'from-indigo-400 to-indigo-600'
   }
 ];
 

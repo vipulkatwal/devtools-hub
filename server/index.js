@@ -15,7 +15,6 @@ dotenv.config();
 const authRoutes = require("./routes/auth");
 const jsonRoutes = require("./routes/json");
 const snippetsRoutes = require("./routes/snippets");
-const aiRoutes = require("./routes/ai");
 
 // Initialize Express app
 const app = express();
@@ -64,7 +63,6 @@ mongoose
 app.use("/api/auth", authRoutes);
 app.use("/api/json", jsonRoutes);
 app.use("/api/snippets", snippetsRoutes);
-app.use("/api", aiRoutes);
 
 // Test route
 app.get("/api/test", (req, res) => {
