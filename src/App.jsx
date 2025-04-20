@@ -1,9 +1,14 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from 'react-redux';
 import { store } from './store';
-import MainLayout from './components/layout/MainLayout';
+import MainLayout from "./components/layout/MainLayout";
+import Home from "./pages/Home";
+import CodeFormatter from "./pages/CodeFormatter";
+import Features from "./pages/Features";
+import About from "./pages/About";
+import Settings from "./pages/Settings";
 import Dashboard from './pages/Dashboard';
-import CodeFormatter from './pages/CodeFormatter';
 import RegexTester from './pages/RegexTester';
 import JsonFormatter from './pages/JsonFormatter';
 import SnippetManager from './pages/SnippetManager';
@@ -25,8 +30,12 @@ const App = () => {
       <Router>
         <MainLayout>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Home />} />
             <Route path="/code-formatter" element={<CodeFormatter />} />
+            <Route path="/features" element={<Features />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/regex-tester" element={<RegexTester />} />
             <Route path="/json-formatter" element={<JsonFormatter />} />
             <Route path="/uuid-generator" element={<UuidGenerator />} />

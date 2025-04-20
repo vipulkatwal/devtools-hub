@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
   Code,
   FileText,
@@ -15,19 +15,49 @@ import {
   ChevronRight,
   Type,
   GitCompare,
-  Smile
-} from 'lucide-react';
-import { useState } from 'react';
-import { cn } from '@/lib/utils';
+  Smile,
+  Smartphone,
+  FileEdit,
+  Layout,
+  Share2,
+  Moon,
+  Sun,
+  Github,
+  Search,
+  Bell,
+  User,
+  Layers,
+  Info
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const MainLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDarkMode]);
 
   const navItems = [
     { path: '/', icon: Home, label: 'Dashboard' },
     { path: '/code-formatter', icon: Code, label: 'Code Formatter' },
-    { path: '/markdown-preview', icon: FileText, label: 'Markdown Preview' },
     { path: '/regex-tester', icon: Terminal, label: 'Regex Tester' },
     { path: '/json-formatter', icon: Braces, label: 'JSON Formatter' },
     { path: '/uuid-generator', icon: Key, label: 'UUID Generator' },
@@ -36,97 +66,120 @@ const MainLayout = ({ children }) => {
     { path: '/lorem-ipsum', icon: Type, label: 'Lorem Ipsum' },
     { path: '/diff-checker', icon: GitCompare, label: 'Diff Checker' },
     { path: '/icon-picker', icon: Smile, label: 'Icon Picker' },
+    { path: '/breakpoint-tester', icon: Smartphone, label: 'Breakpoint Tester' },
+    { path: '/jwt-decoder', icon: Key, label: 'JWT Decoder' },
+    { path: '/readme-generator', icon: FileEdit, label: 'README Generator' },
+    { path: '/css-tools', icon: Layout, label: 'CSS Tools' },
+    { path: '/meta-tags', icon: Share2, label: 'Meta Tags' },
   ];
 
+  const navLinks = [
+    { path: "/", label: "Home", icon: Home },
+    { path: "/features", label: "Features", icon: Layers },
+    { path: "/about", label: "About", icon: Info },
+    { path: "/settings", label: "Settings", icon: Settings },
+  ];
+
+  const filteredNavItems = navItems.filter(item =>
+    item.label.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="min-h-screen bg-[#0A0F1C]">
-      <nav
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+      <header
         className={cn(
-          "fixed top-0 left-0 h-full transition-all duration-300 ease-in-out z-50",
-          isSidebarOpen ? "w-64" : "w-20"
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          isScrolled
+            ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-lg"
+            : "bg-transparent"
         )}
       >
-        <div className="relative h-full bg-[#111827]/80 backdrop-blur-xl border-r border-gray-800/50">
-          <div className="flex items-center justify-between p-5 border-b border-gray-800/50">
-            {isSidebarOpen && (
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-                <h1 className="text-lg font-semibold bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">
-                  DevTools Hub
-                </h1>
-              </div>
-            )}
-            <button
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="p-2 hover:bg-gray-800/50 rounded-lg transition-colors"
-            >
-              {isSidebarOpen ? (
-                <X className="w-5 h-5 text-gray-400" />
-              ) : (
-                <Menu className="w-5 h-5 text-gray-400" />
-              )}
-            </button>
-          </div>
+        <nav className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link to="/" className="flex items-center space-x-2">
+              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 text-transparent bg-clip-text">
+                DevTools Hub
+              </span>
+            </Link>
 
-          <div className="p-3">
-            <ul className="space-y-1">
-              {navItems.map((item) => {
-                const isActive = location.pathname === item.path;
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              {navLinks.map((link) => {
+                const Icon = link.icon;
                 return (
-                  <li key={item.path}>
-                    <Link
-                      to={item.path}
-                      className={cn(
-                        "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group relative",
-                        isActive
-                          ? "bg-blue-500/10 text-blue-400"
-                          : "text-gray-400 hover:bg-gray-800/50 hover:text-gray-100"
-                      )}
-                    >
-                      <item.icon className={cn(
-                        "w-5 h-5 transition-transform group-hover:scale-110",
-                        isActive && "text-blue-400"
-                      )} />
-                      {isSidebarOpen && (
-                        <>
-                          <span className="font-medium">{item.label}</span>
-                          {isActive && (
-                            <ChevronRight className="w-4 h-4 text-blue-400 absolute right-3" />
-                          )}
-                        </>
-                      )}
-                    </Link>
-                  </li>
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={cn(
+                      "flex items-center space-x-1 px-4 py-2 rounded-lg transition-colors",
+                      location.pathname === link.path
+                        ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
+                        : "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                    )}
+                  >
+                    <Icon className="w-4 h-4" />
+                    <span>{link.label}</span>
+                  </Link>
                 );
               })}
-            </ul>
+            </div>
+
+            {/* Theme Toggle & Mobile Menu Button */}
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={() => setIsDarkMode(!isDarkMode)}
+                className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              >
+                {isDarkMode ? (
+                  <Sun className="w-5 h-5" />
+                ) : (
+                  <Moon className="w-5 h-5" />
+                )}
+              </button>
+
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-5 h-5" />
+                ) : (
+                  <Menu className="w-5 h-5" />
+                )}
+              </button>
+            </div>
           </div>
 
-          <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-800/50">
-            <button
-              className={cn(
-                "w-full flex items-center gap-3 px-3 py-2.5 text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 rounded-lg transition-colors",
-                "group"
-              )}
-            >
-              <Settings className="w-5 h-5 transition-transform group-hover:rotate-90" />
-              {isSidebarOpen && (
-                <span className="font-medium">Settings</span>
-              )}
-            </button>
-          </div>
-        </div>
-      </nav>
+          {/* Mobile Navigation */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden py-4 space-y-2">
+              {navLinks.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={cn(
+                      "flex items-center space-x-2 px-4 py-3 rounded-lg transition-colors",
+                      location.pathname === link.path
+                        ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
+                        : "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                    )}
+                  >
+                    <Icon className="w-5 h-5" />
+                    <span>{link.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </nav>
+      </header>
 
-      <main
-        className={cn(
-          "min-h-screen transition-all duration-300 ease-in-out pt-5",
-          isSidebarOpen ? "pl-64" : "pl-20"
-        )}
-      >
-        <div className="container mx-auto p-6 max-w-7xl">
-          {children}
-        </div>
+      <main className="pt-16">
+        <div className="container mx-auto px-4 py-8">{children}</div>
       </main>
     </div>
   );

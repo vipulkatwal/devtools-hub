@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -8,12 +8,12 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle, Copy, Download, Upload } from "lucide-react";
 import Editor from "@monaco-editor/react";
 import { toast } from "react-hot-toast";
-import prettier from "prettier/standalone";
-import parserBabel from "prettier/parser-babel";
-import parserHtml from "prettier/parser-html";
-import parserCss from "prettier/parser-postcss";
-import parserMarkdown from "prettier/parser-markdown";
-import parserYaml from "prettier/parser-yaml";
+import * as prettier from "prettier/standalone";
+import * as parserBabel from "prettier/parser-babel";
+import * as parserHtml from "prettier/parser-html";
+import * as parserCss from "prettier/parser-postcss";
+import * as parserMarkdown from "prettier/parser-markdown";
+import * as parserYaml from "prettier/parser-yaml";
 import beautify from "js-beautify";
 
 const CodeFormatter = () => {
@@ -26,6 +26,10 @@ const CodeFormatter = () => {
   const [indentSize, setIndentSize] = useState(2);
   const [semicolons, setSemicolons] = useState(true);
   const [quotes, setQuotes] = useState("single");
+
+  const handleEditorDidMount = () => {
+    // Editor is ready
+  };
 
   const formatCode = () => {
     setError(null);
@@ -94,7 +98,8 @@ const CodeFormatter = () => {
       setFormattedCode(formatted);
       toast.success("Code formatted successfully");
     } catch (err) {
-      setError(err.message);
+      console.error("Formatting error:", err);
+      setError(err.message || "Failed to format code");
       toast.error("Failed to format code");
     }
   };
@@ -276,11 +281,17 @@ const CodeFormatter = () => {
               language={language}
               value={code}
               onChange={setCode}
+              onMount={handleEditorDidMount}
               options={{
                 minimap: { enabled: false },
                 lineNumbers: showLineNumbers ? "on" : "off",
                 wordWrap: wordWrap ? "on" : "off",
                 tabSize: indentSize,
+                automaticLayout: true,
+                scrollBeyondLastLine: false,
+                renderWhitespace: "none",
+                fontSize: 14,
+                fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
               }}
             />
           </CardContent>
@@ -295,12 +306,18 @@ const CodeFormatter = () => {
               height="400px"
               language={language}
               value={formattedCode}
+              onMount={handleEditorDidMount}
               options={{
                 readOnly: true,
                 minimap: { enabled: false },
                 lineNumbers: showLineNumbers ? "on" : "off",
                 wordWrap: wordWrap ? "on" : "off",
                 tabSize: indentSize,
+                automaticLayout: true,
+                scrollBeyondLastLine: false,
+                renderWhitespace: "none",
+                fontSize: 14,
+                fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
               }}
             />
           </CardContent>
