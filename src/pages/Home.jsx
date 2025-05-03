@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Code, Palette, Zap, Search, Wrench, Layout } from "lucide-react";
-import { motion } from "framer-motion";
 
 const Home = () => {
   const tools = [
@@ -48,128 +47,66 @@ const Home = () => {
     },
   ];
 
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 },
-  };
-
   return (
     <div className="space-y-24 pb-16">
       {/* Hero Section */}
-      <section className="relative pt-24 pb-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 -z-10" />
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-400/10 dark:bg-blue-400/20 rounded-full blur-3xl animate-blob" />
-          <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-purple-400/10 dark:bg-purple-400/20 rounded-full blur-3xl animate-blob animation-delay-2000" />
-          <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-cyan-400/10 dark:bg-cyan-400/20 rounded-full blur-3xl animate-blob animation-delay-4000" />
-        </div>
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="relative"
-            >
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
-              <h1 className="relative text-5xl sm:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 text-transparent bg-clip-text leading-tight">
+      <section className="relative pt-4 pb-4 min-h-[40vh] flex items-center justify-center">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-950 via-gray-900 to-cyan-900 opacity-90" />
+        <div className="w-full flex justify-center">
+          <div className="max-w-3xl w-full text-center px-4 sm:px-8">
+            <div className="backdrop-blur-xl bg-white/10 border border-white/10 rounded-xl shadow-xl px-8 py-6 mx-auto">
+              <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">
                 Essential Developer Tools
                 <br />
-                All in One Place
-              </h1>
-            </motion.div>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300"
-            >
-              Streamline your development workflow with our collection of powerful tools.
-              <br />
-              Built by developers, for developers.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex items-center justify-center gap-4 flex-wrap"
-            >
-              <Link
-                to="/features"
-                className="group relative px-8 py-4 rounded-lg bg-blue-600 text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/20"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-300" />
-                <span className="relative flex items-center gap-2">
-                  Explore Tools
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                  All in One Place
                 </span>
-              </Link>
-              <Link
-                to="/about"
-                className="px-8 py-4 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100 font-medium transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-gray-500/10"
-              >
-                Learn More
-              </Link>
-            </motion.div>
+              </h1>
+              <p className="text-lg text-gray-200 font-medium mb-8">
+                Streamline your workflow with our <span className="text-cyan-300 font-semibold">powerful developer tools</span>.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link
+                  to="/features"
+                  className="px-7 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold text-base shadow-md transition-all flex items-center gap-2"
+                >
+                  <span className="inline-block"><ArrowRight className="w-5 h-5" /></span>
+                  Explore Tools
+                </Link>
+                <Link
+                  to="/about"
+                  className="px-7 py-3 rounded-lg bg-gray-900/80 hover:bg-gray-800 text-gray-100 font-semibold text-base shadow-md border border-white/10 transition-all flex items-center gap-2"
+                >
+                  Learn More
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Tools Grid */}
       <section className="container mx-auto px-4">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="text-center space-y-4 mb-16">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100"
-            >
+            <h2 className="text-3xl font-bold text-white">
               Popular Tools
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-xl text-gray-600 dark:text-gray-300"
-            >
+            </h2>
+            <p className="text-gray-300">
               Discover our most used developer tools and utilities
-            </motion.p>
+            </p>
           </div>
-          <motion.div
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {tools.map((tool) => (
-              <motion.div
+              <div
                 key={tool.path}
-                variants={item}
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
               >
                 <Link
                   to={tool.path}
-                  className="group block p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="block p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow group"
                 >
                   <div className="flex items-center gap-4">
-                    <div className={`p-3 rounded-lg bg-gradient-to-br ${tool.gradient} transform group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`p-3 rounded-lg bg-gradient-to-br ${tool.gradient}`}>
                       <tool.icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -180,70 +117,48 @@ const Home = () => {
                         {tool.description}
                       </p>
                     </div>
-                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-all duration-300 transform group-hover:translate-x-1" />
+                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors ml-auto" />
                   </div>
                 </Link>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Features */}
-      <section className="container mx-auto px-4 relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900/50 dark:to-blue-900/50 rounded-3xl -z-10" />
-        <div className="max-w-5xl mx-auto py-16">
+      <section className="container mx-auto px-4">
+        <div className="max-w-4xl mx-auto">
           <div className="text-center space-y-4 mb-16">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100"
-            >
+            <h2 className="text-3xl font-bold text-white">
               Why Choose Us?
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-xl text-gray-600 dark:text-gray-300"
-            >
+            </h2>
+            <p className="text-gray-300">
               Built with the latest technologies and best practices
-            </motion.p>
+            </p>
           </div>
-          <motion.div
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {features.map((feature) => (
-              <motion.div
+              <div
                 key={feature.title}
-                variants={item}
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg"
               >
                 <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-lg bg-blue-100 dark:bg-blue-900/30 transform group-hover:scale-110 transition-transform duration-300">
+                  <div className="p-3 rounded-lg bg-blue-100 dark:bg-blue-900/30">
                     <feature.icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
                       {feature.title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-lg">
+                    <p className="text-gray-600 dark:text-gray-300">
                       {feature.description}
                     </p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

@@ -31,25 +31,25 @@ const Settings = () => {
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Header */}
         <div>
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
+          <h1 className="text-4xl font-bold text-white">
             Settings
           </h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-300">
+          <p className="mt-2 text-gray-300">
             Customize your development environment
           </p>
         </div>
 
         {/* Appearance */}
-        <Card>
+        <Card className="bg-gray-800 border border-gray-700">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-white">
               <Palette className="w-5 h-5" />
               Appearance
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-2">
-              <Label>Theme</Label>
+              <Label className="text-gray-100">Theme</Label>
               <div className="grid grid-cols-3 gap-4">
                 {themes.map((item) => {
                   const Icon = item.icon;
@@ -59,9 +59,9 @@ const Settings = () => {
                       onClick={() => setTheme(item.value)}
                       className={`flex items-center gap-2 p-3 rounded-lg border-2 transition-colors ${
                         theme === item.value
-                          ? "border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20"
-                          : "border-gray-200 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-400"
-                      }`}
+                          ? "border-blue-400 bg-blue-900/20"
+                          : "border-gray-700 hover:border-blue-400"
+                      } text-gray-100`}
                     >
                       <Icon className="w-5 h-5" />
                       <span>{item.label}</span>
@@ -72,14 +72,14 @@ const Settings = () => {
             </div>
 
             <div className="space-y-2">
-              <Label>Font Size</Label>
+              <Label className="text-gray-100">Font Size</Label>
               <Select value={fontSize} onValueChange={setFontSize}>
-                <SelectTrigger>
+                <SelectTrigger className="bg-gray-900 text-gray-100 border-gray-700">
                   <SelectValue placeholder="Select font size" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-gray-900 text-gray-100 border-gray-700">
                   {fontSizes.map((size) => (
-                    <SelectItem key={size.value} value={size.value}>
+                    <SelectItem key={size.value} value={size.value} className="text-gray-100">
                       {size.label}
                     </SelectItem>
                   ))}
@@ -90,9 +90,9 @@ const Settings = () => {
         </Card>
 
         {/* Editor Settings */}
-        <Card>
+        <Card className="bg-gray-800 border border-gray-700">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-white">
               <Layout className="w-5 h-5" />
               Editor
             </CardTitle>
@@ -100,8 +100,8 @@ const Settings = () => {
           <CardContent className="space-y-6">
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
-                <Label>Auto Save</Label>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <Label className="text-gray-100">Auto Save</Label>
+                <p className="text-sm text-gray-400">
                   Automatically save changes as you type
                 </p>
               </div>
@@ -113,8 +113,8 @@ const Settings = () => {
 
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
-                <Label>Line Numbers</Label>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <Label className="text-gray-100">Line Numbers</Label>
+                <p className="text-sm text-gray-400">
                   Show line numbers in the editor
                 </p>
               </div>
@@ -126,8 +126,8 @@ const Settings = () => {
 
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
-                <Label>Word Wrap</Label>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <Label className="text-gray-100">Word Wrap</Label>
+                <p className="text-sm text-gray-400">
                   Wrap long lines to fit in the editor
                 </p>
               </div>
@@ -139,8 +139,8 @@ const Settings = () => {
 
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
-                <Label>Minimap</Label>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <Label className="text-gray-100">Minimap</Label>
+                <p className="text-sm text-gray-400">
                   Show code overview on the right side
                 </p>
               </div>
@@ -153,19 +153,19 @@ const Settings = () => {
         </Card>
 
         {/* Preview */}
-        <Card>
+        <Card className="bg-gray-800 border border-gray-700">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-white">
               <Eye className="w-5 h-5" />
               Preview
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-              <p className="text-gray-900 dark:text-gray-100" style={{ fontSize: `${fontSize}px` }}>
+            <div className="p-4 bg-gray-900 rounded-lg">
+              <p className="text-white" style={{ fontSize: `${fontSize}px` }}>
                 This is how your text will look
               </p>
-              <p className="mt-2 text-gray-600 dark:text-gray-300" style={{ fontSize: `${fontSize}px` }}>
+              <p className="mt-2 text-gray-300" style={{ fontSize: `${fontSize}px` }}>
                 With different styles and colors
               </p>
             </div>
