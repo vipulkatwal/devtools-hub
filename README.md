@@ -1,106 +1,85 @@
 # 🚀 DevTools Hub
 
-A modern, all-in-one platform providing essential tools for developers to streamline their workflow, boost productivity, and enhance their coding experience.
+A modern, all-in-one developer tools hub with a beautiful UI. Format code, validate JSON, generate and browse color palettes, test regex, and more — all in a single, fast, frontend-only app!
+
+![Vite](https://img.shields.io/badge/Vite-frontend-blue?logo=vite)
+![React](https://img.shields.io/badge/React-18+-blue?logo=react)
+![Demo](https://img.shields.io/badge/Live%20Demo-Coming%20Soon-green)
 
 ---
 
-## ✨ Features
+## ✨ Overview
 
-- 🧩 **Code Formatter**: Format code for multiple languages with customizable rules.
-- 🔍 **Regex Tester**: Test and debug regular expressions with instant feedback.
-- 🟪 **JSON Formatter**: Format, validate, and visualize JSON data.
-- 🎨 **Color Palette**: Generate beautiful color palettes with contrast checking.
-- 🛠️ **CSS Tools**: Flexbox, grid, shadow, and gradient generators.
-- 🆔 **UUID Generator**: Create unique identifiers for your projects.
-- 📝 **Meta Tags Generator**: Create and preview meta tags for SEO and social sharing.
-- 🧪 **Diff Checker**: Compare and highlight differences between text/code blocks.
-- 📋 **Snippets Manager**: Save and organize your frequently used code snippets.
-- ⚡ **And more...**
+**DevTools Hub** is your go-to web app for essential developer utilities, featuring a premium, user-friendly interface. No backend required — everything runs in your browser!
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Features
 
-**Frontend:**
-- ⚛️ React (with Vite)
-- 🎨 Tailwind CSS
-- 🗂️ Redux Toolkit
-- 📝 Monaco Editor
-- 🧩 Shadcn UI Components
-- 🌙 Dark Mode Only
-
-**Backend:**
-- 🟩 Node.js
-- 🚂 Express.js
-- 🍃 MongoDB (with Mongoose)
-- 🔒 JWT Authentication
+- 🎨 **Color Palette Generator & Gallery**
+  - Generate beautiful palettes, copy colors, and browse trending palettes (Color Hunt style)
+- 🧹 **Code Formatter**
+  - Format JavaScript, HTML, CSS, Markdown, YAML, and more
+- 🧩 **JSON Formatter & Validator**
+  - Format, validate, and compare JSON with real-time feedback
+- 🔍 **Regex Tester**
+  - Test and debug regular expressions with instant results
+- 📝 **Snippet Manager**
+  - Save, search, and organize code snippets
+- 🛠️ **CSS Tools, JWT Decoder, Icon Picker, and more!**
 
 ---
 
-## 📦 Getting Started
+## 📸 Screenshots
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/yourusername/devtools-hub.git
-cd devtools-hub
-```
-
-### 2. Install Dependencies
-- **Frontend:**
-  ```bash
-  cd frontend
-  npm install
-  ```
-- **Backend:**
-  ```bash
-  cd server
-  npm install
-  ```
-
-### 3. Environment Variables
-- Create a `.env` file in both `frontend` and `server` directories.
-- Example for backend:
-  ```env
-  MONGO_URI=your_mongodb_connection_string
-  JWT_SECRET=your_jwt_secret
-  PORT=5000
-  ```
-- Example for frontend:
-  ```env
-  VITE_API_URL=http://localhost:5000
-  ```
-
-### 4. Run the App
-- **Backend:**
-  ```bash
-  cd server
-  npm run dev
-  ```
-- **Frontend:**
-  ```bash
-  cd frontend
-  npm run dev
-  ```
+| Color Palette Gallery | JSON Formatter | Code Formatter |
+|----------------------|---------------|---------------|
+| ![Palette](docs/screenshot-palette.png) | ![JSON](docs/screenshot-json.png) | ![Code](docs/screenshot-code.png) |
 
 ---
 
-## 📚 Project Structure
+## ⚡ Tech Stack
 
-```
-root/
-├── frontend/         # React + Vite + Tailwind + Redux + Shadcn UI
-├── server/           # Node.js + Express + MongoDB
-└── README.md
-```
-
----
-
-## 🙌 Credits
-
-Built and maintained by [Your Name].
+- [React 18+](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [Monaco Editor](https://microsoft.github.io/monaco-editor/)
+- [Shadcn UI](https://ui.shadcn.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Lucide Icons](https://lucide.dev/)
 
 ---
 
-## 📄 License
+## 🚀 Getting Started
 
-This project is for personal/professional use. All rights reserved.
+1. **Clone the repo:**
+   ```bash
+   git clone https://github.com/your-username/devtools-hub.git
+   cd devtools-hub
+   ```
+2. **Install dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+3. **Start the app:**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+4. **Open in your browser:**
+   - Visit [http://localhost:5173](http://localhost:5173)
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
+
+---
+
+## 📝 License
+
+MIT License. See [LICENSE](LICENSE) for details.
