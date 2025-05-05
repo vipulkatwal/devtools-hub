@@ -181,17 +181,28 @@ const RegexTester = () => {
           <CardTitle>Test String</CardTitle>
         </CardHeader>
         <CardContent>
-          <Editor
-            height="200px"
-            language="plaintext"
-            value={testString}
-            onChange={setTestString}
-            options={{
-              minimap: { enabled: false },
-              lineNumbers: showLineNumbers ? "on" : "off",
-              wordWrap: wordWrap ? "on" : "off",
-            }}
-          />
+          <div className="rounded-lg border border-gray-300 dark:border-gray-700 bg-white/70 dark:bg-gray-900/70 shadow-lg overflow-hidden p-2 transition-all">
+            <Editor
+              height="200px"
+              language="plaintext"
+              value={testString}
+              onChange={setTestString}
+              options={{
+                minimap: { enabled: false },
+                lineNumbers: "on",
+                wordWrap: wordWrap ? "on" : "off",
+                fontFamily: "Fira Mono, Menlo, Monaco, 'Liberation Mono', 'Courier New', monospace",
+                automaticLayout: true,
+                scrollBeyondLastLine: false,
+                renderLineHighlight: "all",
+                scrollbar: {
+                  vertical: "auto",
+                  horizontal: "auto"
+                }
+              }}
+              className="rounded-md"
+            />
+          </div>
         </CardContent>
       </Card>
 

@@ -1,30 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Code,
-  Terminal,
-  Braces,
-  Bookmark,
-  Key,
-  Palette,
-  ArrowRight,
-  Sparkles,
-  Command,
-  Keyboard,
-  Type,
-  GitCompare,
-  Smile,
-  Smartphone,
-  FileEdit,
-  Layout,
-  Share2,
-  Search,
-  Zap,
-  Clock,
-  Star,
-  TrendingUp,
-  Users
-} from 'lucide-react';
+import { Code, Terminal, Braces, Bookmark, Key, Palette, ArrowRight, Type, GitCompare, Layout, Search, Zap } from 'lucide-react';
 
 const tools = [
   {
@@ -111,7 +87,7 @@ const tools = [
   {
     title: 'Icon Picker',
     description: 'Browse and search through a collection of icons and emojis.',
-    icon: Smile,
+    icon: Layout,
     path: '/icon-picker',
     color: 'from-orange-500/10 to-orange-600/10 hover:from-orange-500/20 hover:to-orange-600/20',
     iconColor: 'text-orange-500',
@@ -120,7 +96,7 @@ const tools = [
   {
     title: 'Breakpoint Tester',
     description: 'Test responsive layouts across different device sizes.',
-    icon: Smartphone,
+    icon: Layout,
     path: '/breakpoint-tester',
     color: 'from-rose-500/10 to-rose-600/10 hover:from-rose-500/20 hover:to-rose-600/20',
     iconColor: 'text-rose-500',
@@ -138,7 +114,7 @@ const tools = [
   {
     title: 'README Generator',
     description: 'Generate professional README files with badges and markdown preview.',
-    icon: FileEdit,
+    icon: Layout,
     path: '/readme-generator',
     color: 'from-violet-500/10 to-violet-600/10 hover:from-violet-500/20 hover:to-violet-600/20',
     iconColor: 'text-violet-500',
@@ -147,7 +123,7 @@ const tools = [
   {
     title: 'Meta Tags Generator',
     description: 'Generate meta tags for better SEO and social media sharing.',
-    icon: Share2,
+    icon: Layout,
     path: '/meta-tags',
     color: 'from-indigo-500/10 to-indigo-600/10 hover:from-indigo-500/20 hover:to-indigo-600/20',
     iconColor: 'text-indigo-500',
@@ -157,17 +133,17 @@ const tools = [
 
 const features = [
   {
-    icon: Command,
+    icon: Layout,
     title: 'Keyboard Shortcuts',
     description: 'Use keyboard shortcuts for faster navigation and improved workflow.'
   },
   {
-    icon: Sparkles,
+    icon: Layout,
     title: 'Modern Interface',
     description: 'Clean and intuitive interface designed for maximum productivity.'
   },
   {
-    icon: Keyboard,
+    icon: Layout,
     title: 'Quick Access',
     description: 'Save frequently used snippets and settings for quick access.'
   }
@@ -175,7 +151,7 @@ const features = [
 
 const stats = [
   {
-    icon: Clock,
+    icon: Layout,
     title: 'Time Saved',
     value: '2.5h',
     description: 'Average time saved per day',
@@ -183,7 +159,7 @@ const stats = [
     bgColor: 'bg-blue-500/10'
   },
   {
-    icon: Star,
+    icon: Layout,
     title: 'User Rating',
     value: '4.9/5',
     description: 'Based on 1,234 reviews',
@@ -191,7 +167,7 @@ const stats = [
     bgColor: 'bg-yellow-500/10'
   },
   {
-    icon: TrendingUp,
+    icon: Layout,
     title: 'Growth',
     value: '+127%',
     description: 'Monthly active users',
@@ -199,7 +175,7 @@ const stats = [
     bgColor: 'bg-green-500/10'
   },
   {
-    icon: Users,
+    icon: Layout,
     title: 'Active Users',
     value: '12.5k',
     description: 'Across 150+ countries',
@@ -254,7 +230,7 @@ const Dashboard = () => {
                 <span>Get Started</span>
               </button>
               <button className="btn-outline flex items-center gap-2">
-                <Command className="w-5 h-5" />
+                <Layout className="w-5 h-5" />
                 <span>Keyboard Shortcuts</span>
               </button>
             </div>
@@ -299,7 +275,7 @@ const Dashboard = () => {
       {/* Search Section */}
       <section className="relative">
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <Layout className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
           <input
             type="text"
             placeholder="Search tools..."
@@ -349,7 +325,7 @@ const Dashboard = () => {
             // No results
             <div className="col-span-full text-center py-12">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-800/50 mb-4">
-                <Search className="w-8 h-8 text-gray-400" />
+                <Layout className="w-8 h-8 text-gray-400" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">No tools found</h3>
               <p className="text-gray-400">Try adjusting your search query</p>

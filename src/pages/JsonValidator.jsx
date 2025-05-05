@@ -83,7 +83,7 @@ const JsonValidator = () => {
               </div>
             </div>
           </div>
-          <div className="h-[600px] border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
+          <div className="h-[600px] rounded-lg border border-gray-300 dark:border-gray-700 bg-white/70 dark:bg-gray-900/70 shadow-lg overflow-hidden p-2 transition-all">
             <Editor
               height="100%"
               language="json"
@@ -95,8 +95,16 @@ const JsonValidator = () => {
                 fontSize: 14,
                 lineNumbers: "on",
                 wordWrap: "on",
+                fontFamily: "Fira Mono, Menlo, Monaco, 'Liberation Mono', 'Courier New', monospace",
                 automaticLayout: true,
+                scrollBeyondLastLine: false,
+                renderLineHighlight: "all",
+                scrollbar: {
+                  vertical: "auto",
+                  horizontal: "auto"
+                }
               }}
+              className="rounded-md"
             />
           </div>
           {!isValid && (
@@ -111,7 +119,7 @@ const JsonValidator = () => {
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
             Formatted JSON
           </h2>
-          <div className="h-[600px] border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
+          <div className="h-[600px] rounded-lg border border-gray-300 dark:border-gray-700 bg-white/70 dark:bg-gray-900/70 shadow-lg overflow-hidden p-2 transition-all">
             <Editor
               height="100%"
               language="json"
@@ -123,8 +131,16 @@ const JsonValidator = () => {
                 fontSize: 14,
                 lineNumbers: "on",
                 wordWrap: "on",
+                fontFamily: "Fira Mono, Menlo, Monaco, 'Liberation Mono', 'Courier New', monospace",
                 automaticLayout: true,
+                scrollBeyondLastLine: false,
+                renderLineHighlight: "all",
+                scrollbar: {
+                  vertical: "auto",
+                  horizontal: "auto"
+                }
               }}
+              className="rounded-md"
             />
           </div>
         </div>

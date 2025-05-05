@@ -276,24 +276,32 @@ const CodeFormatter = () => {
             <CardTitle>Input Code</CardTitle>
           </CardHeader>
           <CardContent>
-            <Editor
-              height="400px"
-              language={language}
-              value={code}
-              onChange={setCode}
-              onMount={handleEditorDidMount}
-              options={{
-                minimap: { enabled: false },
-                lineNumbers: showLineNumbers ? "on" : "off",
-                wordWrap: wordWrap ? "on" : "off",
-                tabSize: indentSize,
-                automaticLayout: true,
-                scrollBeyondLastLine: false,
-                renderWhitespace: "none",
-                fontSize: 14,
-                fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
-              }}
-            />
+            <div className="rounded-lg border border-gray-300 dark:border-gray-700 bg-white/70 dark:bg-gray-900/70 shadow-lg overflow-hidden p-2 transition-all">
+              <Editor
+                height="400px"
+                language={language}
+                value={code}
+                onChange={setCode}
+                onMount={handleEditorDidMount}
+                options={{
+                  minimap: { enabled: false },
+                  lineNumbers: "on",
+                  wordWrap: wordWrap ? "on" : "off",
+                  tabSize: indentSize,
+                  automaticLayout: true,
+                  scrollBeyondLastLine: false,
+                  renderWhitespace: "none",
+                  fontSize: 14,
+                  fontFamily: "Fira Mono, Menlo, Monaco, 'Liberation Mono', 'Courier New', monospace",
+                  renderLineHighlight: "all",
+                  scrollbar: {
+                    vertical: "auto",
+                    horizontal: "auto"
+                  }
+                }}
+                className="rounded-md"
+              />
+            </div>
           </CardContent>
         </Card>
 
@@ -302,24 +310,32 @@ const CodeFormatter = () => {
             <CardTitle>Formatted Code</CardTitle>
           </CardHeader>
           <CardContent>
-            <Editor
-              height="400px"
-              language={language}
-              value={formattedCode}
-              onMount={handleEditorDidMount}
-              options={{
-                readOnly: true,
-                minimap: { enabled: false },
-                lineNumbers: showLineNumbers ? "on" : "off",
-                wordWrap: wordWrap ? "on" : "off",
-                tabSize: indentSize,
-                automaticLayout: true,
-                scrollBeyondLastLine: false,
-                renderWhitespace: "none",
-                fontSize: 14,
-                fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
-              }}
-            />
+            <div className="rounded-lg border border-gray-300 dark:border-gray-700 bg-white/70 dark:bg-gray-900/70 shadow-lg overflow-hidden p-2 transition-all">
+              <Editor
+                height="400px"
+                language={language}
+                value={formattedCode}
+                onMount={handleEditorDidMount}
+                options={{
+                  readOnly: true,
+                  minimap: { enabled: false },
+                  lineNumbers: "on",
+                  wordWrap: wordWrap ? "on" : "off",
+                  tabSize: indentSize,
+                  automaticLayout: true,
+                  scrollBeyondLastLine: false,
+                  renderWhitespace: "none",
+                  fontSize: 14,
+                  fontFamily: "Fira Mono, Menlo, Monaco, 'Liberation Mono', 'Courier New', monospace",
+                  renderLineHighlight: "all",
+                  scrollbar: {
+                    vertical: "auto",
+                    horizontal: "auto"
+                  }
+                }}
+                className="rounded-md"
+              />
+            </div>
           </CardContent>
         </Card>
       </div>

@@ -8,9 +8,10 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { AlertCircle, Upload, Download, Copy, Trash2, Sun, Moon, Search, ChevronUp, ChevronDown, WrapText, List, FileType, FileJson, FileCode, FileSpreadsheet, GitCompare, Minimize2 } from "lucide-react";
+import { AlertCircle, Upload, Download, Copy, Trash2, Sun, Moon, Search, ChevronUp, ChevronDown, WrapText, List, FileType, FileJson, FileCode, FileSpreadsheet, GitCompare, Minimize2, CheckCircle, XCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import Ajv2020 from 'ajv/dist/2020';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import { diff } from 'deep-object-diff';
@@ -46,14 +47,33 @@ const JsonFormatter = () => {
   const [searchResult, setSearchResult] = useState(null);
   const [searchError, setSearchError] = useState(null);
   const [schema, setSchema] = useState('');
-  const [schemaError, setSchemaError] = useState(null);
+  const [schemaValid, setSchemaValid] = useState(null);
+  const [schemaSyntaxError, setSchemaSyntaxError] = useState("");
+  const [schemaValidationResult, setSchemaValidationResult] = useState(null);
+  const [schemaValidationError, setSchemaValidationError] = useState("");
   const [diffInput, setDiffInput] = useState('');
   const [diffResult, setDiffResult] = useState(null);
   const [isCompressed, setIsCompressed] = useState(false);
+  const [jsonValid, setJsonValid] = useState(null);
+  const [jsonError, setJsonError] = useState("");
 
-  // Initialize Ajv with formats
-  const ajv = new Ajv();
-  addFormats(ajv);
+  // Helper to get Ajv instance based on $schema
+  const getAjv = (schemaStr) => {
+    try {
+      const parsed = JSON.parse(schemaStr);
+      if (parsed && typeof parsed === 'object' && parsed['$schema']) {
+        if (parsed['$schema'].includes('2020-12')) {
+          const ajv2020 = new Ajv2020({ strict: false });
+          addFormats(ajv2020);
+          return ajv2020;
+        }
+      }
+    } catch { /* ignore, fallback to default Ajv */ }
+    // Default to Ajv draft-07
+    const ajv = new Ajv({ strict: false });
+    addFormats(ajv);
+    return ajv;
+  };
 
   // Load saved settings from localStorage
   useEffect(() => {
@@ -385,31 +405,6 @@ const JsonFormatter = () => {
     URL.revokeObjectURL(url);
   };
 
-  const validateSchema = () => {
-    if (!schema.trim() || !input.trim()) {
-      setSchemaError('Please provide both JSON and schema');
-      return;
-    }
-
-    try {
-      const jsonData = JSON.parse(input);
-      const schemaData = JSON.parse(schema);
-      const validate = ajv.compile(schemaData);
-      const valid = validate(jsonData);
-
-      if (valid) {
-        setSchemaError(null);
-        toast.success('JSON is valid according to the schema');
-      } else {
-        setSchemaError(ajv.errorsText(validate.errors));
-        toast.error('JSON validation failed');
-      }
-    } catch (err) {
-      setSchemaError(err.message);
-      toast.error('Invalid schema or JSON');
-    }
-  };
-
   const exportToCsv = () => {
     if (!output) return;
     try {
@@ -473,6 +468,65 @@ const JsonFormatter = () => {
       toast.error(`Failed to ${isCompressed ? 'decompress' : 'compress'} JSON: ${err.message}`);
     }
   };
+
+  // Real-time JSON input validation
+  useEffect(() => {
+    if (!input.trim()) {
+      setJsonValid(null);
+      setJsonError("");
+      return;
+    }
+    try {
+      JSON.parse(input);
+      setJsonValid(true);
+      setJsonError("");
+    } catch (err) {
+      setJsonValid(false);
+      setJsonError(err.message);
+    }
+  }, [input]);
+
+  // Real-time schema syntax validation
+  useEffect(() => {
+    if (!schema.trim()) {
+      setSchemaValid(null);
+      setSchemaSyntaxError("");
+      return;
+    }
+    try {
+      JSON.parse(schema);
+      setSchemaValid(true);
+      setSchemaSyntaxError("");
+    } catch (err) {
+      setSchemaValid(false);
+      setSchemaSyntaxError(err.message);
+    }
+  }, [schema]);
+
+  // Real-time JSON Schema validation (if both are valid)
+  useEffect(() => {
+    if (jsonValid && schemaValid) {
+      try {
+        const jsonData = JSON.parse(input);
+        const schemaData = JSON.parse(schema);
+        const ajvInstance = getAjv(schema);
+        const validate = ajvInstance.compile(schemaData);
+        const valid = validate(jsonData);
+        setSchemaValidationResult(valid);
+        if (valid) {
+          setSchemaValidationError("");
+        } else {
+          setSchemaValidationError(ajvInstance.errorsText(validate.errors));
+        }
+      } catch (err) {
+        setSchemaValidationResult(false);
+        setSchemaValidationError(err.message);
+      }
+    } else {
+      setSchemaValidationResult(null);
+      setSchemaValidationError("");
+    }
+  }, [input, schema, jsonValid, schemaValid]);
 
   return (
     <div
@@ -658,34 +712,92 @@ const JsonFormatter = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle>JSON Schema Validation</CardTitle>
+          <CardTitle>
+            Input JSON
+            <span title="Paste your JSON data here. This is the data that will be formatted, validated, and used for all features." aria-label="Input JSON Info" className="ml-2 cursor-help text-blue-400">🛈</span>
+          </CardTitle>
+          <div className="flex items-center gap-2 mt-2">
+            {jsonValid === true && (
+              <span className="flex items-center text-green-500" aria-label="Valid JSON"><CheckCircle className="w-5 h-5 mr-1" />Valid JSON</span>
+            )}
+            {jsonValid === false && (
+              <span className="flex items-center text-red-500" aria-label="Invalid JSON"><XCircle className="w-5 h-5 mr-1" />{jsonError}</span>
+            )}
+          </div>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <Editor
+            height="400px"
+            language="json"
+            value={input}
+            onChange={handleInputChange}
+            theme={editorTheme}
+            options={{
+              minimap: { enabled: editorSettings.minimap },
+              fontSize: fontSize,
+              lineNumbers: editorSettings.lineNumbers ? "on" : "off",
+              wordWrap: editorSettings.wordWrap ? "on" : "off",
+              automaticLayout: true,
+            }}
+          />
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>
+            JSON Schema Validation
+            <span title="Paste your JSON Schema here. This schema will be used to validate your input JSON." aria-label="Schema Info" className="ml-2 cursor-help text-blue-400">🛈</span>
+          </CardTitle>
+          <div className="flex items-center gap-2 mt-2">
+            {schemaValid === true && (
+              <span className="flex items-center text-green-500" aria-label="Valid Schema"><CheckCircle className="w-5 h-5 mr-1" />Valid Schema</span>
+            )}
+            {schemaValid === false && (
+              <span className="flex items-center text-red-500" aria-label="Invalid Schema"><XCircle className="w-5 h-5 mr-1" />{schemaSyntaxError}</span>
+            )}
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-2 mb-2">
+            <Label htmlFor="schema-editor" className="font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-2 mb-2">
+              JSON Schema
+              <span title="Paste your JSON Schema here. Example: { 'type': 'object', ... }" aria-label="Schema Tooltip" className="cursor-help text-blue-400">🛈</span>
+            </Label>
+          </div>
+          <div className="rounded-lg border border-gray-300 dark:border-gray-700 bg-white/70 dark:bg-gray-900/70 shadow-lg p-2 transition-all">
             <Editor
-              height="200px"
+              id="schema-editor"
+              height="220px"
               language="json"
               value={schema}
-              onChange={setSchema}
+              onChange={value => setSchema(value || '')}
               theme={editorTheme}
               options={{
                 minimap: { enabled: false },
                 fontSize: fontSize,
-                lineNumbers: editorSettings.lineNumbers ? "on" : "off",
+                lineNumbers: "on",
                 wordWrap: editorSettings.wordWrap ? "on" : "off",
+                fontFamily: "Fira Mono, Menlo, Monaco, 'Liberation Mono', 'Courier New', monospace",
+                automaticLayout: true,
+                scrollBeyondLastLine: false,
+                renderLineHighlight: "all",
+                scrollbar: {
+                  vertical: "auto",
+                  horizontal: "auto"
+                }
               }}
-              placeholder="Enter JSON Schema here..."
+              className="rounded-md"
+              placeholder="Paste your JSON Schema here..."
             />
-            <Button onClick={validateSchema}>
-              Validate JSON
-            </Button>
-            {schemaError && (
-              <Alert variant="destructive">
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription>{schemaError}</AlertDescription>
-              </Alert>
-            )}
           </div>
+          {/* Real-time schema validation result */}
+          {schemaValidationResult === true && (
+            <div className="flex items-center text-green-500 bg-green-100/70 dark:bg-green-900/40 rounded-md px-3 py-2 mt-2"><CheckCircle className="w-5 h-5 mr-1" />JSON is valid according to the schema</div>
+          )}
+          {schemaValidationResult === false && (
+            <div className="flex items-center text-red-500 bg-red-100/70 dark:bg-red-900/40 rounded-md px-3 py-2 mt-2"><XCircle className="w-5 h-5 mr-1" />{schemaValidationError}</div>
+          )}
         </CardContent>
       </Card>
 
@@ -727,7 +839,10 @@ const JsonFormatter = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card>
           <CardHeader>
-            <CardTitle>Input JSON</CardTitle>
+            <CardTitle>
+              Input JSON
+              <span title="Paste your JSON data here. This is the data that will be formatted, validated, and used for all features." aria-label="Input JSON Info" className="ml-2 cursor-help text-blue-400">🛈</span>
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <Editor

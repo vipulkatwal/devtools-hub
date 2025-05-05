@@ -265,7 +265,7 @@ const SnippetManager = () => {
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Code
                 </label>
-                <div className="mt-1 h-[300px] border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
+                <div className="mt-1 h-[300px] rounded-lg border border-gray-300 dark:border-gray-700 bg-white/70 dark:bg-gray-900/70 shadow-lg overflow-hidden p-2 transition-all">
                   <Editor
                     height="100%"
                     language={currentSnippet.language}
@@ -281,8 +281,16 @@ const SnippetManager = () => {
                       fontSize: 14,
                       lineNumbers: 'on',
                       wordWrap: 'on',
+                      fontFamily: "Fira Mono, Menlo, Monaco, 'Liberation Mono', 'Courier New', monospace",
                       automaticLayout: true,
+                      scrollBeyondLastLine: false,
+                      renderLineHighlight: "all",
+                      scrollbar: {
+                        vertical: "auto",
+                        horizontal: "auto"
+                      }
                     }}
+                    className="rounded-md"
                   />
                 </div>
               </div>

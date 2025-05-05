@@ -22,6 +22,7 @@ import JwtDecoder from './pages/JwtDecoder';
 import ReadmeGenerator from './pages/ReadmeGenerator';
 import CssTools from './pages/CssTools';
 import MetaTags from './pages/MetaTags';
+import ColorPaletteGallery from './pages/ColorPaletteGallery';
 import { Toaster } from 'sonner';
 
 const App = () => {
@@ -49,6 +50,7 @@ const App = () => {
             <Route path="/readme-generator" element={<ReadmeGenerator />} />
             <Route path="/css-tools" element={<CssTools />} />
             <Route path="/meta-tags" element={<MetaTags />} />
+            <Route path="/color-palettes" element={<ColorPaletteGallery />} />
           </Routes>
         </MainLayout>
         <Toaster

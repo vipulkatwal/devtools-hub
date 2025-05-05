@@ -1,34 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Code, Palette, Zap, Search, Wrench, Layout } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const Home = () => {
   const tools = [
     {
       title: "Code Formatter",
       description: "Format your code with customizable rules and support for multiple languages.",
-      icon: Code,
       path: "/code-formatter",
       gradient: "from-blue-500 to-cyan-500",
     },
     {
       title: "Color Palette",
       description: "Generate beautiful color palettes with contrast checking and export options.",
-      icon: Palette,
       path: "/color-palette",
       gradient: "from-purple-500 to-pink-500",
     },
     {
+      title: "Color Palette Gallery",
+      description: "Browse and search beautiful color palettes, inspired by Dribbble/Color Hunt UI.",
+      path: "/color-palettes",
+      gradient: "from-yellow-400 to-pink-400",
+    },
+    {
       title: "Regex Tester",
       description: "Test and debug regular expressions with instant feedback and syntax highlighting.",
-      icon: Search,
       path: "/regex-tester",
       gradient: "from-green-500 to-emerald-500",
     },
     {
       title: "CSS Tools",
       description: "Generate and customize CSS for flexbox, grid, shadows, and gradients.",
-      icon: Layout,
       path: "/css-tools",
       gradient: "from-orange-500 to-red-500",
     },
@@ -38,12 +40,10 @@ const Home = () => {
     {
       title: "Modern Interface",
       description: "Clean and intuitive design with dark mode support and responsive layout.",
-      icon: Zap,
     },
     {
       title: "Developer Focused",
       description: "Built by developers, for developers, with the tools you need most.",
-      icon: Wrench,
     },
   ];
 
@@ -107,7 +107,7 @@ const Home = () => {
                 >
                   <div className="flex items-center gap-4">
                     <div className={`p-3 rounded-lg bg-gradient-to-br ${tool.gradient}`}>
-                      <tool.icon className="w-6 h-6 text-white" />
+                      {/* Icon placeholder */}
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
@@ -145,7 +145,7 @@ const Home = () => {
               >
                 <div className="flex items-start gap-4">
                   <div className="p-3 rounded-lg bg-blue-100 dark:bg-blue-900/30">
-                    <feature.icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                    {/* Icon placeholder */}
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
